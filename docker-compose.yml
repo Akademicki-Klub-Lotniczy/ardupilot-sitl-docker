@@ -1,0 +1,11 @@
+version: '3'
+services:
+  sitl:
+    image: wnt3rmute/ardupilot-sitl
+    network_mode: "host"
+    volumes:
+      - "$HOME/.Xauthority:/home/akl/.Xauthority:rw" # --env="DISPLAY" wtf
+    environment:
+      - DISPLAY
+    command: ./sim_vehicle.py -L Ballarat --console --map -v ArduCopter -N
+    #command: ./sim_vehicle.py -L Ballarat --map -v ArduCopter -N
