@@ -6,9 +6,6 @@ RUN pacman -Syu base-devel --noconfirm
 # Python2
 RUN pacman -S git python2 python2-pip --noconfirm
 
-# Gtk and X to run anything gui-related
-RUN pacman -S xorg-server gtk3 gtk2 --noconfirm 
-
 # For ardupilot communication using TCP
 RUN pip2 install pymavlink mavproxy
 
@@ -60,3 +57,29 @@ RUN cp sim_vehicle.py sim_vehicle_backup.py
 RUN echo "#!/usr/bin/env python2" > sim_vehicle.py 
 RUN cat sim_vehicle_backup.py >> sim_vehicle.py
 
+# Image size before cleaning up:
+# wnt3rmute/ardupilot-sitl   latest              7e392bf31577        45 hours ago        3.95GB
+
+
+####################
+#   Cleaning up    #
+####################
+
+# Switch to root for doing administration stuff
+USER root
+
+# Clear the pacman cache
+# RUN pacman -Sc --noconfirm
+
+# Clear the compiler dir
+RUN rm -rf /home/akl/compiler
+
+# Uninstall the compiler package
+RUN pacman -Rscn gcc-arm-none-eabi-bin-6-2017-q2 --noconfirm
+
+# Image size after cleaning up:
+# wnt3rmute/ardupilot-sitl   latest              52df6f37fd04        2 minutes ago       3.89GB
+# A smaller difference than i was expecting... TODO: clear more stuff
+
+# Switch back to akl
+USER akl
