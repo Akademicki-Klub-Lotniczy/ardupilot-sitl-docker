@@ -4,15 +4,16 @@ FROM archlinux/base
 RUN pacman -Syu base-devel --noconfirm
 
 # Python2
-RUN pacman -S git python2 python2-pip --noconfirm
+RUN pacman -S git python python-pip python-setuptools --noconfirm
 
 # For ardupilot communication using TCP
-RUN pip2 install pymavlink mavproxy
+RUN pip install wheel
+RUN pip install pymavlink mavproxy
 
 # Not needed to compile, but required for the map and GUI to work
-RUN sudo pacman -S procps-ng xterm wget tk python2-wxpython3 --noconfirm
-RUN sudo pacman -S python2-numpy --noconfirm
-RUN sudo pip2 install opencv-python 
+RUN sudo pacman -S gcc procps-ng xterm wget tk python-wxpython --noconfirm
+RUN sudo pacman -S python-numpy --noconfirm
+RUN sudo pip install opencv-python 
 
 # Create a user
 RUN useradd -m akl
@@ -43,19 +44,20 @@ RUN git submodule update --init --recursive
 # OKAY SO SINCE ARCH USES PYTHON3 AS DEFAULT, WAF WONT RUN CORRECTLY
 # SINCE ITS MEANT FOR PYTHON2i
 # Thats why I echo the shebang for python2 into the top of the waf <3
-RUN cp waf wafbackup
-RUN echo "#!/usr/bin/env python2" > waf
-RUN cat wafbackup >> waf
+# RUN cp waf wafbackup
+# RUN echo "#!/usr/bin/env python2" > waf
+# RUN cat wafbackup >> waf
 
 RUN ./waf configure
 RUN ./waf copter
+RUN ./waf plane
 
 WORKDIR /home/akl/ardupilot/Tools/autotest
 
 # Same thing as Waf
-RUN cp sim_vehicle.py sim_vehicle_backup.py
-RUN echo "#!/usr/bin/env python2" > sim_vehicle.py 
-RUN cat sim_vehicle_backup.py >> sim_vehicle.py
+# RUN cp sim_vehicle.py sim_vehicle_backup.py
+# RUN echo "#!/usr/bin/env python2" > sim_vehicle.py 
+# RUN cat sim_vehicle_backup.py >> sim_vehicle.py
 
 # Image size before cleaning up:
 # wnt3rmute/ardupilot-sitl   latest              7e392bf31577        45 hours ago        3.95GB

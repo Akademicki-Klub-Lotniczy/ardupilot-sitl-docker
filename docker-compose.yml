@@ -9,6 +9,6 @@ services:
       - "$HOME/.Xauthority:/home/akl/.Xauthority:rw" # --env="DISPLAY" wtf
     environment:
       - DISPLAY
-    command: ./sim_vehicle.py -L Ballarat --console --map -v ArduCopter -N
+    command: ./sim_vehicle.py -L Ballarat --console --map -v ArduPlane -N
     #command: ./sim_vehicle.py -L Ballarat --map -v ArduCopter -N
     
