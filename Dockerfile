@@ -28,10 +28,10 @@ RUN mkdir /home/akl/compiler
 WORKDIR /home/akl/compiler
 
 # Pull installation instruction for the compiler supported by ardupilot
-RUN wget https://gist.githubusercontent.com/Wint3rmute/03dd31bd3fb8cea2ac6c3535331e1876/raw/b40142af3fb61c6e7d8f4564eb245d36e9332748/PKGBUILD 
+# RUN wget https://gist.githubusercontent.com/Wint3rmute/03dd31bd3fb8cea2ac6c3535331e1876/raw/b40142af3fb61c6e7d8f4564eb245d36e9332748/PKGBUILD 
 
 # Install the compiler package (must not be run as root)
-RUN makepkg -sri --noconfirm
+# RUN makepkg -sri --noconfirm
 
 
 # Pull ardupilot
@@ -77,7 +77,7 @@ USER root
 RUN rm -rf /home/akl/compiler
 
 # Uninstall the compiler package
-RUN pacman -Rscn gcc-arm-none-eabi-bin-6-2017-q2 --noconfirm
+# RUN pacman -Rscn gcc-arm-none-eabi-bin-6-2017-q2 --noconfirm
 
 # Image size after cleaning up:
 # wnt3rmute/ardupilot-sitl   latest              52df6f37fd04        2 minutes ago       3.89GB
