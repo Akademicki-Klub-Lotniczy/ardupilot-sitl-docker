@@ -27,7 +27,7 @@ USER akl
 
 # Pull ardupilot
 WORKDIR /home/akl
-RUN git clone https://github.com/ArduPilot/ardupilot.git
+RUN git clone --single-branch --branch plane4.0 https://github.com/ArduPilot/ardupilot.git 
 # From now on, following the official guide: https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md
 WORKDIR /home/akl/ardupilot
 RUN git submodule update --init --recursive
@@ -63,3 +63,6 @@ COPY --from=0 /home/akl/ardupilot /home/akl/ardupilot
 
 USER akl
 WORKDIR /home/akl/ardupilot/Tools/autotest
+
+# Custom AKL locations
+RUN echo "Legnica=51.18268,16.17713,113,80" >> locations.txt

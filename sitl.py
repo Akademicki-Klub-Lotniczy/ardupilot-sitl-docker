@@ -3,12 +3,14 @@
 import argparse
 import os
 
+DEFAULT_LOCATION = 'Legnica'
+
 parser = argparse.ArgumentParser(description='SITL Runner')
 
 parser.add_argument('-m', '--map', help='Show the map window', action='store_true')
 parser.add_argument('-c', '--console', help='Show the console window', action='store_true')
 parser.add_argument('-v', '--vehicle', help='Choose vehicle (ArduPlane or ArduCopter)', required=True )
-
+parser.add_argument('-l', '--location', help=f"Select location ({DEFAULT_LOCATION} by default)", default=DEFAULT_LOCATION)
 cli_args = parser.parse_args()
 
 docker_args = ['docker',
@@ -31,10 +33,12 @@ if cli_args.console:
 
 if cli_args.vehicle:
     vehicle = cli_args.vehicle.strip()
-    print(vehicle)
+    #print(vehicle)
     docker_args.append('-v')
-    docker_args.append(f'{vehicle}')
+    docker_args.append(vehicle)
 
+docker_args.append('-L')
+docker_args.append(cli_args.location)
 
 
 for arg in docker_args:
