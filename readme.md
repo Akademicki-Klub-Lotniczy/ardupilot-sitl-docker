@@ -14,6 +14,21 @@ script to make the whole procedure a bit easier for newcomers.
 
 The script is documented, so I'll just post the output of `./sitl.py --help` here:
 
+```
+usage: sitl.py [-h] [-m] [-c] -v VEHICLE [-l LOCATION]
+
+SITL Runner
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m, --map             Show the map window
+  -c, --console         Show the console window
+  -v VEHICLE, --vehicle VEHICLE
+                        Choose vehicle (ArduPlane or ArduCopter)
+  -l LOCATION, --location LOCATION
+                        Select location (Legnica by default)
+```
+
 
 ### Manually, through `docker`
 
