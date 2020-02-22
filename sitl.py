@@ -13,6 +13,10 @@ parser.add_argument('-v', '--vehicle', help='Choose vehicle (ArduPlane or ArduCo
 parser.add_argument('-l', '--location', help=f"Select location ({DEFAULT_LOCATION} by default)", default=DEFAULT_LOCATION)
 cli_args = parser.parse_args()
 
+# TODO: noninteractive, background mode
+# Got it to run noninteractively with
+# docker run -itd --net=host wnt3rmute/ardupilot-sitl:latest ./sim_vehicle.py -v ArduPlane -N
+
 docker_args = ['docker',
         'run',
         '-it',
