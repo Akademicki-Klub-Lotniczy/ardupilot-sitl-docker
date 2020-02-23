@@ -49,6 +49,13 @@ class SitlDockerHelper:
             self.location
         ])
 
+        if self.map_on:
+            docker_args.append('--map')
+
+        if self.console_on:
+            docker_args.append('--console')
+
+
         if not self.run_in_background:
             print("=== Replacing the current process with Ardupilot Terminal ===")
             os.execvp('docker', docker_args)
