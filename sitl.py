@@ -58,6 +58,7 @@ class SitlDockerHelper:
 
         if not self.run_in_background:
             print("=== Replacing the current process with Ardupilot Terminal ===")
+            print(' '.join(docker_args))
             os.execvp('docker', docker_args)
 
         else:
