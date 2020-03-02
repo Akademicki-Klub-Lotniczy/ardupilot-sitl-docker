@@ -85,7 +85,6 @@ if __name__ == '__main__':
     parser.add_argument('-np', '--pre-arm-checks',
                             help='Enable/Disable pre-arm checks', action='store_false')
     cli_args = parser.parse_args()
-    print(cli_args)
 
     runner = SitlDockerHelper(cli_args.vehicle, cli_args.location, cli_args.map, cli_args.console, False, cli_args.pre_arm_checks)
     runner.run()
