@@ -64,5 +64,8 @@ COPY --from=0 /home/akl/ardupilot /home/akl/ardupilot
 USER akl
 WORKDIR /home/akl/ardupilot/Tools/autotest
 
+# Custom AKL missions
+COPY test_mission.txt .
+
 # Custom AKL locations
 RUN echo "Legnica=51.18268,16.17713,113,80" >> locations.txt
