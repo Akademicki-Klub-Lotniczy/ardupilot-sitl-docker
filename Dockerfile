@@ -40,13 +40,11 @@ RUN ./waf plane
 FROM archlinux/base
 
 
-# Python2
+# Python, required to compile
 RUN pacman -Syu git python python-pip python-setuptools --noconfirm
 
-
 # Not needed to compile, but required for the map and GUI to work
-RUN pacman -S gcc procps-ng xterm wget tk python-wxpython --noconfirm
-RUN pacman -S python-numpy --noconfirm
+RUN pacman -S gcc procps-ng xterm wget tk python-wxpython python-numpy which --noconfirm
 RUN pip install opencv-python 
 
 
@@ -69,3 +67,6 @@ COPY test_mission.txt .
 
 # Custom AKL locations
 RUN echo "Legnica=51.18268,16.17713,113,80" >> locations.txt
+
+# Optional params for arm checks disabling (for faster arming in tests)
+RUN echo "ARMING_CHECK 0" >> no_pre_arm_checks.parm
